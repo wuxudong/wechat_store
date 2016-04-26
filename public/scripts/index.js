@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
-import {App} from './components/App';
+import {addToCart} from './action_creators.js';
+
+import App from './components/App';
 
 const store = createStore(reducer);
 

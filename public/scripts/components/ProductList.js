@@ -4,15 +4,15 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-
+import {addToCart} from '../action_creators.js'
 const ProductItem = React.createClass({
     handleClick: function () {
-        this.props.handleClick(this.props.product.id);
+        this.props.handleClick(this.props.product.get('id'));
     },
 
     render: function () {
         return <div onClick={this.handleClick}>
-            <span>{this.props.product.name}</span>
+            <span>{this.props.product.get('name')}</span>
         </div>
     }
 
@@ -21,8 +21,17 @@ const ProductItem = React.createClass({
 
 const ProductList = React.createClass({
 
+    count: function (cart, productId) {
+        return cart.get(productId) ? cart.get(productId) : 0;
+    },
+
     render: function () {
-        var list = this.props.products.map(entry => <ProductItem key={entry.id} product={entry} handleClick={this.props.handleAddToCartClick}/>);
+        var list = this.props.products.map(entry =>
+                <div key={entry.get('id')}>
+                    <ProductItem  product={entry} handleClick={this.props.handleAddToCartClick}/>
+                    <span>{this.count(this.props.cart, entry.get('id'))}</span>
+                </div>
+        );
 
         return <div>{list}</div>
     }
@@ -30,7 +39,9 @@ const ProductList = React.createClass({
 
 function mapStateToProps(state) {
     return {
-        products: state.get('products')
+        products: state.get('products'),
+        cart : state.get('cart')
+
     };
 }
 

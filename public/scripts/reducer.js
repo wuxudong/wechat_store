@@ -1,17 +1,14 @@
 import {List, Map} from 'immutable';
-import {LOGIN, ADD_TO_CART, SUBMIT_ORDER} from './action_creators.js';
+import Immutable from 'immutable';
+import {ACTION_TYPE} from './action_creators.js';
 import fetch from 'isomorphic-fetch'
 
 function login(state, profile) {
-    return Object.assign({}, state, {
-        profile
-    });
+    return state.set('profile', profile);
 }
 
 function addToCart(state, productId) {
-    var newState = state.updateIn(['cart', productId], 0, count => count + 1);
-    console.log(newState);
-    return newState;
+    return state.updateIn(['cart', productId], 0, count => count + 1);
 }
 
 function submitOrder(state) {
@@ -23,28 +20,32 @@ function submitOrder(state) {
     })
 }
 
-const initialData = {products : [{
-    id: 1,
-    name: 'product1',
-    imgUrl: ''
-}, {
-    id: 2,
-    name: 'product2',
-    imgUrl: ''
-}, {
-    id: 3,
-    name: 'product3',
-    imgUrl: ''
-}]}
+const InitialData = Immutable.fromJS({
+    products: [{
+        id: 1,
+        name: 'product1',
+        imgUrl: ''
+    }, {
+        id: 2,
+        name: 'product2',
+        imgUrl: ''
+    }, {
+        id: 3,
+        name: 'product3',
+        imgUrl: ''
+    }],
+    cart : {},
+    profile : {}
 
+});
 
-export default function (state = Map(initialData), action = {}) {
+export default function (state = InitialData, action) {
     switch (action.type) {
-        case LOGIN:
+        case ACTION_TYPE.LOGIN:
             return login(state, action.profile);
-        case ADD_TO_CART:
+        case ACTION_TYPE.ADD_TO_CART:
             return addToCart(state, action.productId);
-        case SUBMIT_ORDER:
+        case ACTION_TYPE.SUBMIT_ORDER:
             return submitOrder(state);
     }
     return state;
