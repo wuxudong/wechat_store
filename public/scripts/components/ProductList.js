@@ -28,7 +28,7 @@ const ProductList = React.createClass({
     render: function () {
         var list = this.props.products.map(entry =>
                 <div key={entry.get('id')}>
-                    <ProductItem  product={entry} handleClick={this.props.handleAddToCartClick}/>
+                    <ProductItem  product={entry} handleClick={this.props.addToCart}/>
                     <span>{this.count(this.props.cart, entry.get('id'))}</span>
                 </div>
         );
@@ -47,7 +47,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        handleAddToCartClick: (id) => {
+        addToCart: (id) => {
             dispatch(addToCart(id))
         }
     }

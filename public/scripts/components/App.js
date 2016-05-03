@@ -7,11 +7,11 @@ import {ProductListContainer} from './ProductList'
 import {connect} from 'react-redux';
 import {submitOrder} from '../action_creators'
 
-let App = React.createClass({
+const App = React.createClass({
     render: function () {
         return <div>
             <ProductListContainer/>
-            <button onClick={this.props.handleSubmitOrder}>submit</button>
+            <button onClick={this.props.submitOrder}>submit</button>
         </div>
     }
 })
@@ -23,7 +23,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        handleSubmitOrder: () => {
+        submitOrder: () => {
             dispatch(submitOrder())
         }
     }
