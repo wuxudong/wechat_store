@@ -11,6 +11,13 @@ module.exports = {
         publicPath: '/'
     },
 
+    externals: {
+        // require("jquery") is external and available
+        //  on the global var jQuery
+        "wx": "wx"
+    },
+
+
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
