@@ -1,11 +1,12 @@
 var express = require('express');
 var crypto = require('crypto');
+var config = require('../config/wechat.cfg');
 var router = express.Router();
 
-var token = "mrkid";
 
-/* GET home page. */
-router.get('/index', function(req, res, next) {
+var token = "weixin";
+
+router.get('/check', function(req, res, next) {
 
     var signature = req.query.signature;
     var timestamp = req.query.timestamp;
@@ -29,4 +30,5 @@ router.get('/index', function(req, res, next) {
         res.send("error");
     }
 });
+
 module.exports = router;

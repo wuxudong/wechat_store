@@ -19,12 +19,15 @@
     "cookie-parser": "^1.4.1",
     "crypto": "0.0.3",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
     "memory-cache": "^0.1.5",
     "method-override": "^2.3.5",
     "morgan": "^1.7.0",
+    "promise": "^7.1.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "request": "^2.72.0",
+    "request-promise": "^3.0.0",
     "sha1": "^1.1.1"
   },
   "devDependencies": {
